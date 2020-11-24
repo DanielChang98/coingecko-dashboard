@@ -236,7 +236,7 @@ export default function favouriteTable () {
                 </TableCell>
                 <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
                 <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
-                <TableCell align="Left" style={{ width: 160 }}>{row.name}</TableCell>
+                <TableCell align="left" style={{ width: 160 }}>{row.name}</TableCell>
                 <TableCell align="center"  style={{ width: 160 }}>{numberWithCommas(row.current_price)}</TableCell>
                 <TableCell align="center" style={{ width: 160 }}>{numberWithCommas(row.total_volume)}</TableCell>
                 <TableCell align="center" style={{ width: 200 }}>
