@@ -21,7 +21,7 @@ return (
   <>
     <div className={Styles.container}>
       <header>
-        <h1 className={Styles.title}>Crytocurrency Market Dashboard</h1>
+        <h1 className={Styles.title}>Cryptocurrency Market Dashboard</h1>
       </header>
 
       <nav className={Styles.nav}>
