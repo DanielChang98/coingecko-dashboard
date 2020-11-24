@@ -1,0 +1,70 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logoBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 5rem;
+  }
+  
+  .logoImage{
+    height: 20px;
+    width: 20px;
+  }
+  
+  .heading2Xl {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.05rem;
+    margin: 1rem 0;
+    color: #f1c40f;
+  }
+  
+  .headingMd {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ecf0f1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .borderCircle {
+    border-radius: 9999px;
+  }
+  
+  .headerHomeImage {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .main {
+    padding: 5rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nextPage {
+    font-size: 1rem;
+    text-decoration: underline;
+  }
