@@ -223,7 +223,7 @@ export default function BasicTable({rates}) {
         <Typography color="secondary">Dashboard</Typography>
       </Breadcrumbs>
       <FormControl className={classesSelect.formControl}>
-        <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
+        <InputLabel htmlFor="grouped-select">Currency</InputLabel>
         <Select defaultValue="" id="grouped-select" onChange={handleChange}>
           {
             (rates.map((rows)=>(

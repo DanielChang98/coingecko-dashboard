@@ -229,7 +229,7 @@ export default function favouriteTable ({rates}) {
             <Typography color="secondary">Favourites</Typography>
           </Breadcrumbs>
           <FormControl className={classesSelect.formControl}>
-            <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
+            <InputLabel htmlFor="grouped-select">Currency</InputLabel>
             <Select defaultValue="" id="grouped-select" onChange={handleChange}>
               {
                 (rates.map((rows)=>(
