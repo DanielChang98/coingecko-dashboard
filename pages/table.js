@@ -127,7 +127,6 @@ function numberWithCommas(x) {
 var counter = 0;
 
 export default function BasicTable({data}) {
-  
   const classes = useStylesTable();
   const classesSelect = useStylesSelect();
   const [currency, setCurrency] = React.useState();
@@ -146,7 +145,7 @@ export default function BasicTable({data}) {
       localStorage.removeItem(object.name);
       setColor(counter++);
     }
-  }
+  };
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -170,27 +169,28 @@ export default function BasicTable({data}) {
     var counter = 1;
     json = json.map(item => {
     item.number = counter
+    item.coin = item.name + " " + "(" + item.symbol.toUpperCase() + ")";
+    console.log(item.coin);
     counter++
-    item.currency = currency;
-    const { id, image, name, number, current_price, total_volume, sparkline_in_7d, currency} = item;
-    return { id, image, name, number, current_price, total_volume, sparkline_in_7d, currency};
-  })
+    const { id, image, coin, number, current_price, total_volume, sparkline_in_7d} = item;
+    return { id, image, coin, number, current_price, total_volume, sparkline_in_7d};
+    })
     console.log(json);
     return(json);
   }
 
-const fetchData = async (value) => {
-  try{
-      const res = await fetch ("https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + value + 
-      "&order=market_cap_desc&per_page=100&page=1&sparkline=true");
-      const json = await res.json();
-      const file = processData(json);
-      setTableData(file);
-  } catch (err) {
-      console.trace (err);
-      alert (err.message);
+  const fetchData = async (value) => {
+    try{
+        const res = await fetch ("https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + value + 
+        "&order=market_cap_desc&per_page=100&page=1&sparkline=true");
+        const json = await res.json();
+        const file = processData(json);
+        setTableData(file);
+    } catch (err) {
+        console.trace (err);
+        alert (err.message);
+    }
   }
-}
 
   return (
   <>
@@ -245,7 +245,7 @@ const fetchData = async (value) => {
               </TableCell>
               <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
               <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
-              <TableCell align="left" style={{ width: 160 }}>{row.name}</TableCell>
+              <TableCell align="left" style={{ width: 160 }}>{row.coin}</TableCell>
               <TableCell align="center"  style={{ width: 160 }}>{numberWithCommas(row.current_price)}</TableCell>
               <TableCell align="center" style={{ width: 160 }}>{numberWithCommas(row.total_volume)}</TableCell>
               <TableCell align="center" style={{ width: 200 }}>
