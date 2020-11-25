@@ -148,7 +148,7 @@ export default function BasicTable({rates}) {
   };
 
   const handleChange = (event) => {
-    setCurrency(event.target.unit);
+    setCurrency(event.target.value);
     fetchData(event.target.value);
   };
 
