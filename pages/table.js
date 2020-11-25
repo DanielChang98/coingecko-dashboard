@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
+import utilStyles from '../styles/utils.module.css'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Layout from '../components/layout'
 import PropTypes from 'prop-types';
@@ -197,7 +198,7 @@ const fetchData = async (value) => {
     <title>Cryptocurrency Dashboard</title>
   </Head>
     <Layout></Layout>
-      <div>
+    <div className={utilStyles.divCurrency}>
       <Breadcrumbs aria-label="breadcrumb" className={classesSelect.breadcrumb}>
         <Link color="white" href="/" className={classesSelect.link}>
           Home
@@ -215,8 +216,8 @@ const fetchData = async (value) => {
               <MenuItem value={'myr'}>MYR</MenuItem>
               <MenuItem value={'sgd'}>SGD</MenuItem>
           </Select>
-        </FormControl>
-      </div>
+      </FormControl>
+    </div>
     <TableContainer component={Paper} className={classes.paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
