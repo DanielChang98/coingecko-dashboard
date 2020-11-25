@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head'
 import Layout from '../components/layout'
+import utilStyles from '../styles/utils.module.css'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
@@ -203,14 +204,14 @@ export default function favouriteTable () {
       <title>Favourite Page</title>
     </Head>
         <Layout />
-        <div>
-        <Breadcrumbs aria-label="breadcrumb" className={classesSelect.breadcrumb}>
-          <Link color="white" href="/" className={classesSelect.link}>
-            Home
-          </Link>
-          <Typography color="secondary">Favourites</Typography>
-        </Breadcrumbs>
-        <FormControl className={classesSelect.formControl}>
+        <div className={utilStyles.divCurrency}>
+          <Breadcrumbs aria-label="breadcrumb" className={classesSelect.breadcrumb}>
+            <Link color="white" href="/" className={classesSelect.link}>
+              Home
+            </Link>
+            <Typography color="secondary">Favourites</Typography>
+          </Breadcrumbs>
+          <FormControl className={classesSelect.formControl}>
             <InputLabel id="demo-simple-select-label">Currency</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
@@ -221,7 +222,7 @@ export default function favouriteTable () {
                 <MenuItem value={'myr'}>MYR</MenuItem>
                 <MenuItem value={'sgd'}>SGD</MenuItem>
             </Select>
-            </FormControl>
+          </FormControl>
         </div>
         <TableContainer component={Paper} className={classes.paper}>
         <Table className={classes.table} aria-label="simple table">
