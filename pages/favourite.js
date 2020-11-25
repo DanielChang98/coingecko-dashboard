@@ -266,7 +266,7 @@ export default function favouriteTable ({rates}) {
                 </TableCell>
                 <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
                 <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
-                <TableCell align="left" style={{ width: 160 }}>{row.name}</TableCell>
+                <TableCell align="left" style={{ width: 160 }}>{row.coin}</TableCell>
                 <TableCell align="center"  style={{ width: 160 }}>{row.price}</TableCell>
                 <TableCell align="center" style={{ width: 160 }}>{row.volume}</TableCell>
                 <TableCell align="center" style={{ width: 200 }}>
