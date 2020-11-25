@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter';
 import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -36,7 +37,7 @@ const useStylesTable = makeStyles({
   },
 });
 
-const useStyles1 = makeStyles((theme) => ({
+const useStylesPagination = makeStyles((theme) => ({
     root: {
       flexShrink: 0,
       marginLeft: theme.spacing(2.5),
@@ -63,7 +64,7 @@ const useStylesSelect = makeStyles((theme) => ({
 }));
 
 function TablePaginationActions(props) {
-    const classes = useStyles1();
+    const classes = useStylesPagination();
     const theme = useTheme();
     const { count, page, rowsPerPage, onChangePage } = props;
   
@@ -126,7 +127,7 @@ function numberWithCommas(x) {
 
 var counter = 0;
 
-export default function BasicTable({data}) {
+export default function BasicTable({rates}) {
   const classes = useStylesTable();
   const classesSelect = useStylesSelect();
   const [currency, setCurrency] = React.useState();
@@ -148,7 +149,7 @@ export default function BasicTable({data}) {
   };
 
   const handleChange = (event) => {
-    setCurrency(event.target.value);
+    setCurrency(event.target.unit);
     fetchData(event.target.value);
   };
 
@@ -164,18 +165,35 @@ export default function BasicTable({data}) {
   function containElement (param) {
     return localStorage.getItem(param) ? true : false;
   }
-  
-  const processData = (json) =>{
-    var counter = 1;
-    json = json.map(item => {
-    item.number = counter
-    item.coin = item.name + " " + "(" + item.symbol.toUpperCase() + ")";
-    console.log(item.coin);
-    counter++
-    const { id, image, coin, number, current_price, total_volume, sparkline_in_7d} = item;
-    return { id, image, coin, number, current_price, total_volume, sparkline_in_7d};
+
+  function getExchangeRateUnit (params) {
+    let unit;
+
+    rates.map((item)=>{
+      if(item.key===params){
+        unit = item.unit;
+      }
     })
-    console.log(json);
+
+    return unit;
+  }
+  
+  //value is the exchange rate key
+  const processData = (json, value) =>{
+    var counter = 1;
+    var unit;
+
+    json = json.map(item => {
+      unit = getExchangeRateUnit(value);
+      item.number = counter
+      item.coin = item.name + " " + "(" + item.symbol.toUpperCase() + ")";
+      item.price = unit + " " + numberWithCommas(item.current_price);
+      item.volume = unit + " " + numberWithCommas(item.total_volume);
+      counter++
+      const { id, image, name, coin, number, price, volume, sparkline_in_7d} = item;
+      return { id, image,name, coin, number, price, volume, sparkline_in_7d};
+    })
+
     return(json);
   }
 
@@ -184,7 +202,7 @@ export default function BasicTable({data}) {
         const res = await fetch ("https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + value + 
         "&order=market_cap_desc&per_page=100&page=1&sparkline=true");
         const json = await res.json();
-        const file = processData(json);
+        const file = processData(json,value);
         setTableData(file);
     } catch (err) {
         console.trace (err);
@@ -206,16 +224,14 @@ export default function BasicTable({data}) {
         <Typography color="secondary">Dashboard</Typography>
       </Breadcrumbs>
       <FormControl className={classesSelect.formControl}>
-        <InputLabel id="demo-simple-select-label">Currency</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={currency}
-            onChange={handleChange}
-            >
-              <MenuItem value={'myr'}>MYR</MenuItem>
-              <MenuItem value={'sgd'}>SGD</MenuItem>
-          </Select>
+        <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
+        <Select defaultValue="" id="grouped-select" onChange={handleChange}>
+          {
+            (rates.map((rows)=>(
+                <MenuItem value={rows.key}>{rows.name}</MenuItem>
+            )))
+          }
+        </Select>
       </FormControl>
     </div>
     <TableContainer component={Paper} className={classes.paper}>
@@ -246,8 +262,8 @@ export default function BasicTable({data}) {
               <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
               <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
               <TableCell align="left" style={{ width: 160 }}>{row.coin}</TableCell>
-              <TableCell align="center"  style={{ width: 160 }}>{numberWithCommas(row.current_price)}</TableCell>
-              <TableCell align="center" style={{ width: 160 }}>{numberWithCommas(row.total_volume)}</TableCell>
+              <TableCell align="center"  style={{ width: 160 }}>{row.price}</TableCell>
+              <TableCell align="center" style={{ width: 160 }}>{row.volume}</TableCell>
               <TableCell align="center" style={{ width: 200 }}>
                   <Sparklines data={row.sparkline_in_7d.price}>
                       <SparklinesLine color="green"></SparklinesLine>
@@ -278,4 +294,28 @@ export default function BasicTable({data}) {
     </TableContainer>
   </>
   );
+}
+
+export async function getStaticProps () {
+  const api = await fetch("https://api.coingecko.com/api/v3/exchange_rates");
+    const data = await api.json();
+
+    var rates = [];
+    var obj = data["rates"];
+
+    Object.keys(obj).forEach((key)=>{
+      var a = {
+        name: obj[key].name,
+        type: obj[key].type,
+        unit: obj[key].unit,
+        key: key,
+      }
+      rates.push(a);
+    })
+
+  return{
+    props: {
+      rates
+    }
+  }
 }
