@@ -186,8 +186,8 @@ export default function BasicTable({rates}) {
       unit = getExchangeRateUnit(value);
       item.number = counter
       item.coin = item.name + " " + "(" + item.symbol.toUpperCase() + ")";
-      item.price = unit + " " + numberWithCommas(item.current_price);
-      item.volume = unit + " " + numberWithCommas(item.total_volume);
+      item.price = unit + numberWithCommas(item.current_price);
+      item.volume = unit + numberWithCommas(item.total_volume);
       counter++
       const { id, image, name, coin, number, price, volume, sparkline_in_7d} = item;
       return { id, image,name, coin, number, price, volume, sparkline_in_7d};
