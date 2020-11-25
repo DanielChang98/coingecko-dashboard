@@ -23,6 +23,9 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { AutoSizer } from '@material-ui/data-grid';
 
@@ -46,11 +49,16 @@ const useStylesSelect = makeStyles((theme) => ({
     minWidth: 120,
     backgroundColor: 'white',
     borderRadius: 5,
-    
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  breadcrumb: {
+    color: 'white',
+  },
+  link: {
+    fontSize: '1rem',
+  }
 }));
 
 function TablePaginationActions(props) {
@@ -111,14 +119,14 @@ function TablePaginationActions(props) {
     rowsPerPage: PropTypes.number.isRequired,
   };
 
-var favouriteList = [];
-var counter = 0;
-
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var counter = 0;
+
 export default function BasicTable({data}) {
+  
   const classes = useStylesTable();
   const classesSelect = useStylesSelect();
   const [currency, setCurrency] = React.useState();
@@ -132,12 +140,10 @@ export default function BasicTable({data}) {
       localStorage.setItem(object.name, object)
       setColor(counter++);
       alert("Added to favourite!");
-      console.log(favouriteList);
     }
     else{
       localStorage.removeItem(object.name);
       setColor(counter++);
-      console.log(favouriteList);
     }
   }
 
@@ -185,8 +191,6 @@ const fetchData = async (value) => {
   }
 }
 
-console.log(color);
-
   return (
   <>
   <Head>
@@ -194,6 +198,12 @@ console.log(color);
   </Head>
     <Layout></Layout>
       <div>
+      <Breadcrumbs aria-label="breadcrumb" className={classesSelect.breadcrumb}>
+        <Link color="white" href="/" className={classesSelect.link}>
+          Home
+        </Link>
+        <Typography color="secondary">Dashboard</Typography>
+      </Breadcrumbs>
       <FormControl className={classesSelect.formControl}>
         <InputLabel id="demo-simple-select-label">Currency</InputLabel>
           <Select
@@ -234,7 +244,7 @@ console.log(color);
               </TableCell>
               <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
               <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
-              <TableCell align="Left" style={{ width: 160 }}>{row.name}</TableCell>
+              <TableCell align="left" style={{ width: 160 }}>{row.name}</TableCell>
               <TableCell align="center"  style={{ width: 160 }}>{numberWithCommas(row.current_price)}</TableCell>
               <TableCell align="center" style={{ width: 160 }}>{numberWithCommas(row.total_volume)}</TableCell>
               <TableCell align="center" style={{ width: 200 }}>

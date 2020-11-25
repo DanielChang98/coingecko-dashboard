@@ -23,6 +23,9 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { AutoSizer } from '@material-ui/data-grid';
 
@@ -52,6 +55,12 @@ const useStyles1 = makeStyles((theme) => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    breadcrumb: {
+      color: 'white',
+    },
+    link: {
+      fontSize: '1rem',
+    }
   }));
   
   function TablePaginationActions(props) {
@@ -124,7 +133,6 @@ export default function favouriteTable () {
     const [holder, setTableData] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [color, setColor] = React.useState(-1);
-    const [list, setList] = React.useState({});
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
     const handleFavourite = (object) => {
@@ -196,6 +204,12 @@ export default function favouriteTable () {
     </Head>
         <Layout />
         <div>
+        <Breadcrumbs aria-label="breadcrumb" className={classesSelect.breadcrumb}>
+          <Link color="white" href="/" className={classesSelect.link}>
+            Home
+          </Link>
+          <Typography color="secondary">Favourites</Typography>
+        </Breadcrumbs>
         <FormControl className={classesSelect.formControl}>
             <InputLabel id="demo-simple-select-label">Currency</InputLabel>
             <Select
