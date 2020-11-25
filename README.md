@@ -1,5 +1,6 @@
-## Deploy on Vercel
+## Deployed on Vercel
 
+This application was built using Next.js.  
 Check out the website here -> https://cryptocurrency-dashboard.vercel.app/
 
 ## How it works
