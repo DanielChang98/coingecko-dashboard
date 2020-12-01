@@ -8,7 +8,6 @@ export default function Home() {
         <title>Homepage</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Profile></Profile>
     </div>
   )

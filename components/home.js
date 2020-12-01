@@ -33,7 +33,7 @@ export default function Layout({ children, home }) {
                 Interested in getting an internship position in CoinGecko!
               </p>
             </section>
-            <p><Link href="/table"><a className={utilStyles.nextPage}>Go to dashboard →</a></Link></p>
+            <p><Link href="/dashboard"><a className={utilStyles.nextPage}>Go to dashboard →</a></Link></p>
             </header>
           </div>
       </header>

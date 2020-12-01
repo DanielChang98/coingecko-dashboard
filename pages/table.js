@@ -296,7 +296,7 @@ export default function BasicTable({rates}) {
 }
 
 export async function getStaticProps () {
-  const api = await fetch("https://api.coingecko.com/api/v3/exchange_rates");
+    const api = await fetch("https://api.coingecko.com/api/v3/exchange_rates");
     const data = await api.json();
 
     var rates = [];
