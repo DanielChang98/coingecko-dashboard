@@ -57,6 +57,10 @@ export default function tableComp ({ props, buttonValue, currentPage }){
         return localStorage.getItem(param) ? true : false;
     }
 
+    function lower7d(percentage7d){
+        return percentage7d<=-1 ? true : false;
+    }
+
     function getExchangeRateUnit (params) {
         let unit;
         props.map((item)=>{
@@ -79,8 +83,8 @@ export default function tableComp ({ props, buttonValue, currentPage }){
                     item.price = unit + numberWithCommas(item.current_price);
                     item.volume = unit + numberWithCommas(item.total_volume);
                     counter++
-                    const { id, image, name, coin, number, price, volume, sparkline_in_7d} = item;
-                    return { id, image,name, coin, number, price, volume, sparkline_in_7d};
+                    const { id, image, name, coin, number, price, volume, sparkline_in_7d, price_change_percentage_7d_in_currency} = item;
+                    return { id, image,name, coin, number, price, volume, sparkline_in_7d, price_change_percentage_7d_in_currency};
                 }
             })
             json = json.filter(function(x) {
@@ -94,8 +98,8 @@ export default function tableComp ({ props, buttonValue, currentPage }){
                 item.price = unit + numberWithCommas(item.current_price);
                 item.volume = unit + numberWithCommas(item.total_volume);
                 counter++
-                const { id, image, name, coin, number, price, volume, sparkline_in_7d} = item;
-                return { id, image,name, coin, number, price, volume, sparkline_in_7d};
+                const { id, image, name, coin, number, price, volume, sparkline_in_7d, price_change_percentage_7d_in_currency} = item;
+                return { id, image,name, coin, number, price, volume, sparkline_in_7d, price_change_percentage_7d_in_currency};
             })
         }
 
@@ -105,13 +109,12 @@ export default function tableComp ({ props, buttonValue, currentPage }){
     const fetchData = async () => {
         try{
             const res = await fetch ("https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + buttonValue + 
-            "&order=market_cap_desc&per_page=100&page=1&sparkline=true");
+            "&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=7d");
             const json = await res.json();
             const file = processData(json);
             setTableData(file);
         } catch (err) {
             console.trace (err);
-            // alert (err.message);
         }
     }
 
@@ -152,7 +155,7 @@ export default function tableComp ({ props, buttonValue, currentPage }){
                     <TableCell align="center" style={{ width: 160 }}>{row.volume}</TableCell>
                     <TableCell align="center" style={{ width: 200 }}>
                         <Sparklines data={row.sparkline_in_7d.price}>
-                            <SparklinesLine color="green"></SparklinesLine>
+                            {lower7d(row.price_change_percentage_7d_in_currency) ?<SparklinesLine color="red" />:<SparklinesLine color="green" />}
                         </Sparklines>
                     </TableCell>
                     </TableRow>

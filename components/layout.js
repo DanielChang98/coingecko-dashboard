@@ -1,20 +1,21 @@
 import Head from 'next/head'
 import React, { useState } from 'react';
-import Link from 'next/link'
 import Styles from '../components/layout.module.css'
 
-export default function Layout({ children, setFP }) {
+export default function Layout({ children, setFP, setBC }) {
   const [dashboard, setDashboard] = useState();
   const [fav, setFav] = useState();
 
   function handleDashboard () {
     setFP(false);
+    setBC('Dashboard');
     setFav(false);
     setDashboard(true);
   }
 
   function handleFavourite (){
     setFP(true);
+    setBC('Favourites')
     setFav(true);
     setDashboard(false);
   }

@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import Styles from '../styles/utils.module.css'
 import Layout from '../components/layout'
+import Breadcrumb from '../components/breadcrumb'
 import Button from '../components/buttonComp'
 import Table from '../components/tableComp'
 
 export default function lift({rates}){
     const [currency, setCurrency] = useState('usd');
     const [favouritePage, setFavPage] = useState(false);
+    const [breadcrumb, setBreadCrumb] = useState('Dashboard');
 
     return (
         <>
-          <Layout setFP={setFavPage}></Layout>
+          <Layout setFP={setFavPage} setBC={setBreadCrumb}></Layout>
           <div className={Styles.divCurrency}>
+            <Breadcrumb value={breadcrumb}></Breadcrumb>
             <Button props={rates} onSelect={setCurrency}></Button>
           </div>
           <Table props={rates} buttonValue={currency} currentPage={favouritePage}></Table>
