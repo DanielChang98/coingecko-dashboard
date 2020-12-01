@@ -1,0 +1,53 @@
+.container{
+    width: auto;
+}
+
+.title{
+    min-width: 25rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.nav{
+    background-color: yellow;
+    min-width: 50rem;
+    display: inline;
+    flex-direction: rows;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 1rem;
+  
+}
+
+.navContent{
+    min-width: 25rem;
+    width: 25rem;
+    margin: auto;
+    justify-content: space-around;
+    display: flex;
+}
+
+.underlinemagical {
+    background-image: linear-gradient(120deg, #082ed0 0%, #082ed0 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.3em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    text-decoration: none;
+  }
+
+  .underlinemagical:hover {
+    background-size: 100% 88%;
+    text-decoration: none;
+  }
+
+  .underlinemagical:active{
+    background-image: linear-gradient(120deg, #082ed0 0%, #082ed0 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.3em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    text-decoration: none;
+  }
+
+
