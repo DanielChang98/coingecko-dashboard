@@ -111,13 +111,12 @@ export default function tableComp ({ props, buttonValue, currentPage }){
             setTableData(file);
         } catch (err) {
             console.trace (err);
-            alert (err.message);
+            // alert (err.message);
         }
     }
 
     React.useEffect(() => {
         fetchData();
-        console.log("hello");
       });
 
     return(
