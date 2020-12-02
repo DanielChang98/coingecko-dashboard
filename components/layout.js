@@ -9,11 +9,12 @@ import Styles from '../components/layout.module.css'
  * @returns a div containing the title and 2 navigation anchors.
  */
 
-export default function Layout({ setFP, setBC }) {
+export default function Layout({ setFP, setBC, resetPage }) {
   const [dashboard, setDashboard] = useState();
   const [fav, setFav] = useState();
 
   function handleDashboard () {
+    resetPage(0);
     setFP(false);
     setBC('Dashboard');
     setFav(false);
@@ -21,6 +22,7 @@ export default function Layout({ setFP, setBC }) {
   }
 
   function handleFavourite (){
+    resetPage(0);
     setFP(true);
     setBC('Favourites')
     setFav(true);

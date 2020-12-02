@@ -17,18 +17,19 @@ export default function lift({rates}){
     const [currency, setCurrency] = useState('usd'); //get the value selected from the button.
     const [isFavouritePage, setFavPage] = useState(false); //get bool if favourite page is chosen.
     const [breadcrumb, setBreadCrumb] = useState('Dashboard'); //set breadcrumb string value.
+    const [page, setPage] = useState(0);
 
     return (
         <>
           <Head>
             <title>Cryptocurrency Dashboard</title>
           </Head>
-          <Layout setFP={setFavPage} setBC={setBreadCrumb}></Layout>
+          <Layout setFP={setFavPage} setBC={setBreadCrumb} resetPage={setPage}></Layout>
           <div className={Styles.divCurrency}>
             <Breadcrumb value={breadcrumb}></Breadcrumb>
             <Button props={rates} onSelect={setCurrency}></Button>
           </div>
-          <Table props={rates} buttonValue={currency} currentPage={isFavouritePage}></Table>
+          <Table props={rates} buttonValue={currency} currentPage={isFavouritePage} page={page} setPage={setPage}></Table>
         </>
     );
 }

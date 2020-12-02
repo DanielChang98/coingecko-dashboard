@@ -13,6 +13,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import Tablepagination from '../components/tablePagination';
+import Styles from '../styles/utils.module.css'
 
 const useStylesTable = makeStyles({
     table: {
@@ -30,20 +31,20 @@ function numberWithCommas(x) {
  * @function {fetchData} gets the cryptocurrency from API based on @param {buttonValue}.
  * @function {processData} extacts essential data from json passed from @function {fetchData} based on @param {currentPage}.
  * 
- * 
  * @param {props} an array of objects passed from @page {dashboard} containing info about exchange rates. 
  * @param {buttonValue} a string passed from @page {dashboard} containing the value of the currency button (usd,btc,eth...)
  * @param {currentPage} a boolean passed from @page {dashboard} containing True or False. True for favourite page is chosen.
+ * @param {page} an int passed from @page {dashboard} to track the current table page.
+ * @param {setPage} a page setter passed from @page {dashboard} to set @param page.
  * 
  * @returns a table with rows and a pagination footer row.
  */
 
-export default function tableComp ({ props, buttonValue, currentPage }){
+export default function tableComp ({ props, buttonValue, currentPage, page, setPage }){
     var counter=0;
     const classes = useStylesTable();
     const [holder, setTableData] = React.useState([]);
     const [color, setColor] = React.useState(-1);
-    const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
     const handleFavourite = (object) => {
@@ -141,56 +142,56 @@ export default function tableComp ({ props, buttonValue, currentPage }){
       });
 
     return(
-        <TableContainer component={Paper} className={classes.paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Favourite</TableCell>
-                        <TableCell align="center">#</TableCell>
-                        <TableCell align="center">Coin</TableCell>
-                        <TableCell align="center"></TableCell>
-                        <TableCell align="center">Price</TableCell>
-                        <TableCell align="center">Volume</TableCell>
-                        <TableCell align="center">Sparkline</TableCell>
-                    </TableRow>
-                </TableHead>    
-                <TableBody>
-                    {
-                    (rowsPerPage > 0
-                        ? holder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : holder
-                        ).map((row) => (
-                    <TableRow key={row.number}>
-                    <TableCell component="th" scope="row" align="center" style={{ width: 160 }} value= {color}>
-                        <IconButton onClick={() => handleFavourite(row)}>
-                        {containElement(row.name) ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon/>}
-                        </IconButton>
-                    </TableCell>
-                    <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
-                    <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
-                    <TableCell align="left" style={{ width: 160 }}>{row.coin}</TableCell>
-                    <TableCell align="center"  style={{ width: 160 }}>{row.price}</TableCell>
-                    <TableCell align="center" style={{ width: 160 }}>{row.volume}</TableCell>
-                    <TableCell align="center" style={{ width: 200 }}>
-                        <Sparklines data={row.sparkline_in_7d.price}>
-                            {lower7d(row.price_change_percentage_7d_in_currency) ?<SparklinesLine color="red" />:<SparklinesLine color="green" />}
-                        </Sparklines>
-                    </TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <Tablepagination
-                            count2={holder.length}
-                            rowsPerPage2={rowsPerPage}
-                            page2={page}
-                            changePage={handleChangePage}
-                            changeRowsPerPage={handleChangeRowsPerPage}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
+        <>
+            <TableContainer component={Paper} className={classes.paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Favourite</TableCell>
+                            <TableCell align="center">#</TableCell>
+                            <TableCell align="center">Coin</TableCell>
+                            <TableCell align="center"></TableCell>
+                            <TableCell align="center">Price</TableCell>
+                            <TableCell align="center">Volume</TableCell>
+                            <TableCell align="center">Sparkline</TableCell>
+                        </TableRow>
+                    </TableHead>    
+                    <TableBody>
+                        {
+                        (rowsPerPage > 0
+                            ? holder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : holder
+                            ).map((row) => (
+                        <TableRow key={row.number}>
+                        <TableCell component="th" scope="row" align="center" style={{ width: 160 }} value= {color}>
+                            <IconButton onClick={() => handleFavourite(row)}>
+                            {containElement(row.name) ? <FavoriteIcon color='error' /> : <FavoriteBorderIcon/>}
+                            </IconButton>
+                        </TableCell>
+                        <TableCell align="center"  style={{ width: 160 }}>{row.number}</TableCell>
+                        <TableCell align="center" style={{ width: 160 }}><img src={row.image} height="25%"></img></TableCell>
+                        <TableCell align="left" style={{ width: 160 }}>{row.coin}</TableCell>
+                        <TableCell align="center"  style={{ width: 160 }}>{row.price}</TableCell>
+                        <TableCell align="center" style={{ width: 160 }}>{row.volume}</TableCell>
+                        <TableCell align="center" style={{ width: 200 }}>
+                            <Sparklines data={row.sparkline_in_7d.price}>
+                                {lower7d(row.price_change_percentage_7d_in_currency) ?<SparklinesLine color="red" />:<SparklinesLine color="green" />}
+                            </Sparklines>
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>      
+            </TableContainer>
+            <div className={Styles.divPagination}>
+                <Tablepagination
+                    count2={holder.length}
+                    rowsPerPage2={rowsPerPage}
+                    page2={page}
+                    changePage={handleChangePage}
+                    changeRowsPerPage={handleChangeRowsPerPage}
+                />
+            </div>
+        </>
     );
 }

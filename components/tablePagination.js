@@ -27,7 +27,7 @@ const useStylesPagination = makeStyles((theme) => ({
  * @param {changeRowsPerPage} passed from @component {tablecomp} to fill the TablePagination MUI component.
  */
 export default function tablePagination({count2,rowsPerPage2,page2,changePage,changeRowsPerPage}){
-
+  
     function TablePaginationActions(props) {
         const classes = useStylesPagination();
         const theme = useTheme();
