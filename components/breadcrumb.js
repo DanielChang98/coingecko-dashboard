@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+/**
+ * @param {value} a string passed from @pages {dashboard} that can either be 'Dashboard' or 'Favourites' 
+ * 
+ * @returns a breadcrumb component with a Link to @page {index} and the string of @param {value}
+ */
+
 export default function breadcrumb({value}){
     const classes = useStyles();
 

@@ -5,7 +5,11 @@ import Button from '@material-ui/core/Button';
 
 const name = 'Chang Phang Wei'
 
-export default function Layout({ children, home }) {
+/**
+ * @returns my profile with a link to the dashboard
+ */
+
+export default function Layout() {
   return (
     <div>
       <header>
@@ -24,7 +28,7 @@ export default function Layout({ children, home }) {
               <a href="https://github.com/DanielChang98" target="_blank">
                 <img className={utilStyles.logoImage} src="github-logo.svg" alt="GitHub" title="View Github Profile"/>
               </a>
-              <a href="/resume-chang_phang_wei.pdf" download>
+              <a href="/Resume-Chang Phang Wei.pdf" download>
                 <img className={utilStyles.logoImage} src="resume-logo.png" alt="Download Resume" title="Download Resume"/>
               </a>
             </div>
@@ -37,8 +41,6 @@ export default function Layout({ children, home }) {
             </header>
           </div>
       </header>
-
-      <main>{children}</main>
     </div>
   )
 }

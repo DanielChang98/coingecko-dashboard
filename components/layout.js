@@ -2,7 +2,14 @@ import Head from 'next/head'
 import React, { useState } from 'react';
 import Styles from '../components/layout.module.css'
 
-export default function Layout({ children, setFP, setBC }) {
+/**
+ * @param {setFP} useState setter for @component {tableComp} passed from @page {dashboard} to set boolean values.
+ * @param {setBC} useState setter for @component {breadcrumb} passed from @page {dashboard} to set string values
+ * 
+ * @returns a div containing the title and 2 navigation anchors.
+ */
+
+export default function Layout({ setFP, setBC }) {
   const [dashboard, setDashboard] = useState();
   const [fav, setFav] = useState();
 
@@ -40,7 +47,6 @@ return (
         </div>
       </nav>
     </div>
-      <main>{children}</main>
   </>
   )
 }

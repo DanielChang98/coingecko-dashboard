@@ -30,6 +30,10 @@ import Link from '@material-ui/core/Link';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { AutoSizer } from '@material-ui/data-grid';
 
+/**
+ * @summary This page is not used in the application. Look at the dashboard page.
+ */
+
 const useStylesTable = makeStyles({
   table: {
     minWidth: 500,

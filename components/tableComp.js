@@ -24,6 +24,20 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+/**
+ * @summary Table component that populates its rows based on @param {buttonValue}. 
+ * 
+ * @function {fetchData} gets the cryptocurrency from API based on @param {buttonValue}.
+ * @function {processData} extacts essential data from json passed from @function {fetchData} based on @param {currentPage}.
+ * 
+ * 
+ * @param {props} an array of objects passed from @page {dashboard} containing info about exchange rates. 
+ * @param {buttonValue} a string passed from @page {dashboard} containing the value of the currency button (usd,btc,eth...)
+ * @param {currentPage} a boolean passed from @page {dashboard} containing True or False. True for favourite page is chosen.
+ * 
+ * @returns a table with rows and a pagination footer row.
+ */
+
 export default function tableComp ({ props, buttonValue, currentPage }){
     var counter=0;
     const classes = useStylesTable();
@@ -36,7 +50,6 @@ export default function tableComp ({ props, buttonValue, currentPage }){
         if (!containElement(object.name)){
           localStorage.setItem(object.name, object)
           setColor(counter++);
-          alert("Added to favourite!");
         }
         else{
           localStorage.removeItem(object.name);
@@ -53,6 +66,11 @@ export default function tableComp ({ props, buttonValue, currentPage }){
         setPage(0);
     };
 
+    /**
+     * @param {param} a string passed from @function {processData} containing the cryptocurrency name (Bitcoin)
+     * 
+     * @returns boolean value if the name is stored inside local storage.
+     */
     function containElement (param) {
         return localStorage.getItem(param) ? true : false;
     }

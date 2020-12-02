@@ -15,6 +15,15 @@ const useStylesSelect = makeStyles((theme) => ({
     },
   }));
 
+/**
+ * @summary the button component to choose the currencies available.
+ * 
+ * @param {props} array of objects passed from @page {dashboard} containing exchange rate info.
+ * @param {onSelect} useState setter passed from @page {dashboard} to get the selected value.
+ * 
+ * @returns a button component populated with the values inside @param {props}
+ */
+
 export default function buttonComp ({props, onSelect}) {
     const classes = useStylesSelect();
 

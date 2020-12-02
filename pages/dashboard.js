@@ -6,10 +6,17 @@ import Breadcrumb from '../components/breadcrumb'
 import Button from '../components/buttonComp'
 import Table from '../components/tableComp'
 
+/**
+ * @summary Primary page that is used to lift state up from 4 other components.
+ * 
+ * @param {rates} staticProps containing exchange rate API information.
+ * @returns 4 components: Layout, Breadcrumb, Button, Table 
+ */
+
 export default function lift({rates}){
-    const [currency, setCurrency] = useState('usd');
-    const [favouritePage, setFavPage] = useState(false);
-    const [breadcrumb, setBreadCrumb] = useState('Dashboard');
+    const [currency, setCurrency] = useState('usd'); //get the value selected from the button.
+    const [favouritePage, setFavPage] = useState(false); //get bool if favourite page is chosen.
+    const [breadcrumb, setBreadCrumb] = useState('Dashboard'); //set breadcrumb string value.
 
     return (
         <>
