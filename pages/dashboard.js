@@ -15,7 +15,7 @@ import Table from '../components/tableComp'
 
 export default function lift({rates}){
     const [currency, setCurrency] = useState('usd'); //get the value selected from the button.
-    const [favouritePage, setFavPage] = useState(false); //get bool if favourite page is chosen.
+    const [isFavouritePage, setFavPage] = useState(false); //get bool if favourite page is chosen.
     const [breadcrumb, setBreadCrumb] = useState('Dashboard'); //set breadcrumb string value.
 
     return (
@@ -28,7 +28,7 @@ export default function lift({rates}){
             <Breadcrumb value={breadcrumb}></Breadcrumb>
             <Button props={rates} onSelect={setCurrency}></Button>
           </div>
-          <Table props={rates} buttonValue={currency} currentPage={favouritePage}></Table>
+          <Table props={rates} buttonValue={currency} currentPage={isFavouritePage}></Table>
         </>
     );
 }

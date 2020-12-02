@@ -55,7 +55,7 @@ export default function tableComp ({ props, buttonValue, currentPage }){
           localStorage.removeItem(object.name);
           setColor(counter++);
         }
-      };
+    };
     
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
