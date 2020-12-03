@@ -43,6 +43,7 @@ export default function tablePagination({count2,rowsPerPage2,page2,changePage,ch
       
         const handleNextButtonClick = (event) => {
           onChangePage(event, page + 1);
+          console.log("im clicked")
         };
       
         const handleLastPageButtonClick = (event) => {
