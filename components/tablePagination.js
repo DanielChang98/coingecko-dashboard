@@ -31,47 +31,46 @@ export default function tablePagination({count2,rowsPerPage2,page2,changePage,ch
     function TablePaginationActions(props) {
         const classes = useStylesPagination();
         const theme = useTheme();
-        const { count, page, rowsPerPage, onChangePage } = props;
+        const { count } = props;
       
         const handleFirstPageButtonClick = (event) => {
-          onChangePage(event, 0);
+          changePage(event, 0);
         };
       
         const handleBackButtonClick = (event) => {
-          onChangePage(event, page - 1);
+          changePage(event, page2 - 1);
         };
       
         const handleNextButtonClick = (event) => {
-          onChangePage(event, page + 1);
-          console.log("im clicked")
+          changePage(event, page2 + 1);
         };
       
         const handleLastPageButtonClick = (event) => {
-          onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+          changePage(event, Math.max(0, Math.ceil(count / rowsPerPage2) - 1));
         };
       
         return (
           <div className={classes.root}>
             <IconButton
               onClick={handleFirstPageButtonClick}
-              disabled={page === 0}
+              disabled={page2 === 0}
               aria-label="first page"
             >
               {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
             </IconButton>
-            <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+            <IconButton onClick={handleBackButtonClick} disabled={page2 === 0} aria-label="previous page">
               {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </IconButton>
             <IconButton
               onClick={handleNextButtonClick}
-              disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+              disabled={page2 >= Math.ceil(count / rowsPerPage2) - 1}
               aria-label="next page"
             >
               {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
             </IconButton>
             <IconButton
               onClick={handleLastPageButtonClick}
-              disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+              disabled={page2 >= Math.ceil(count / rowsPerPage2) - 1}
               aria-label="last page"
             >
               {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
