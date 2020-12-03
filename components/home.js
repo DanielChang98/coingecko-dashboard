@@ -28,7 +28,7 @@ export default function Layout() {
               <a href="https://github.com/DanielChang98" target="_blank">
                 <img className={utilStyles.logoImage} src="github-logo.svg" alt="GitHub" title="View Github Profile"/>
               </a>
-              <a href="/Resume-Chang Phang Wei.pdf" download>
+              <a href="/Resume-Chang_Phang_Wei.pdf" download>
                 <img className={utilStyles.logoImage} src="resume-logo.png" alt="Download Resume" title="Download Resume"/>
               </a>
             </div>
